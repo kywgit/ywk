@@ -5,11 +5,9 @@ package com.mycode.juc;
  * @Date 2020/9/13
  **/
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * 集合类不安全问题
@@ -45,6 +43,43 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class CopyOnWriteArrayListDemo {
 
     public static void main(String[] args) {
+
+    }
+
+    private static void hashSetTest() {
+        /**
+         * HashSet底层是一个HashMap
+         *     public HashSet() {
+         *         map = new HashMap<>();
+         *     }
+         *      public HashSet(Collection<? extends E> c) {
+         *         map = new HashMap<>(Math.max((int) (c.size()/.75f) + 1, 16));
+         *         addAll(c);
+         *     }
+         *       private static final Object PRESENT = new Object();
+         *
+         *       public boolean add(E e) {
+         *         return map.put(e, PRESENT)==null;
+         *     }
+         * CopyOnWriteArraySet 底层源码是一个CopyOnWriteArrayList
+         *
+         *   private final CopyOnWriteArrayList<E> al;
+         *
+         *    public CopyOnWriteArraySet() {
+         *          al = new CopyOnWriteArrayList<E>();
+         *  }
+         */
+        Set set = new CopyOnWriteArraySet();//Collections.synchronizedSet(new HashSet<>());//new HashSet();
+
+        for (int i = 0; i < 30 ; i++) {
+            new Thread(()->{
+                set.add((int)(Math.random()*10));
+                System.out.println(set.toString());
+            },String.valueOf(i)).start();
+        }
+    }
+
+    private static void arrayListTest() {
         //List list = new ArrayList();
         //Vector list = new Vector();
         //List list = Collections.synchronizedList(new ArrayList<>());
@@ -55,6 +90,5 @@ public class CopyOnWriteArrayListDemo {
                 System.out.println(list.toString());
             },String.valueOf(i)).start();
         }
-
     }
 }
