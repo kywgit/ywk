@@ -5,7 +5,6 @@ package com.mycode.juc;
  * @Date 2020/9/14
  **/
 
-import sun.awt.windows.ThemeReader;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
