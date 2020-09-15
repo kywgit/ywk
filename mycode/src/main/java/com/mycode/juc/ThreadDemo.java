@@ -40,8 +40,12 @@ public class ThreadDemo {
      * 1、继承thread类
      * 2、实现Runable接口
      * 3、实现callable接口
-     * 4、线程池
-     *
+     * 4、线程池 线程服用；控制最大并发数，管理线程。
+     * 线程池优势：
+     * 1、降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
+     * 2、提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。
+     * 3、提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，
+     * 使用线程池可以进行统一分配，调优和监控。
      */
 
     public static void main(String[] args) {
@@ -105,6 +109,7 @@ public class ThreadDemo {
                 System.out.println(Thread.currentThread().getName()+"\t 执行任务"+temp);
             });
         }
+        threadPool.shutdown();
     }
 }
 
