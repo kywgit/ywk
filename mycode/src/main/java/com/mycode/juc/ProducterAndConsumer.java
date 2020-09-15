@@ -55,6 +55,18 @@ class Consumer implements Runnable{
         }
     }
 }
+
+/**
+ * Lock 和 synchronized的区别：
+ * 1、原始构成 synchronized是jvm层面的关键字，Lock是一个具体的类，是api层面的锁。
+ * 2、使用方法 synchronized不需要用户自己去释放锁，Lock需要用户自己释放锁。
+ * 3、等待是否可中断 synchronized不可中断除非抛出异常，或者正常运行完成
+ *     ReentrantLock 可以中断，1.设置超时方法tryLock(long timeout,TimeUnit unit)
+ *                         2。lockInterruptibly()放代码块中，调用interrupy()方法可中断
+ * 4、加锁是否公平 synchronized 是非公平锁
+ *      ReentrantLock 两者皆可，构造方法可以传入一个boolear值，true 表示公平锁，false 表示非公平锁。默认是非公平锁；
+ *
+ */
 class Clerk{
 
     private int product = 0;
