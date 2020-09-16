@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        配置bean
+        class: bean 的全类名，通过反射的方式在IOC容器中创建Bean,所以要求Bean 中必须有无参的构造器
+        id: 标识容器中的bean,id唯一
+    -->
+    <bean id="helloWorld" class="com.spring.HelloWorld">
+
+        <property name="name" value="spring4"></property>
+    </bean>
+    <!--
+        通过构造方法来配置bean的属性
+        使用构造器注入属性值可以指定参数的位置和参数类型！以区分重载的构造器！
+    -->
+    <bean id="car" class="com.spring.Car">
+        <constructor-arg value="audi" index="0"></constructor-arg>
+        <constructor-arg value = "shanghai" index="1"></constructor-arg>
+        <constructor-arg value="300000" type="double"></constructor-arg>
+    </bean>
+    <bean id="car2" class="com.spring.Car">
+        <constructor-arg value="bwm" type="java.lang.String"></constructor-arg>
+        <constructor-arg value="beijin" type="java.lang.String"></constructor-arg>
+        <constructor-arg value="240" type="int"></constructor-arg>
+    </bean>
+
+
+</beans>
