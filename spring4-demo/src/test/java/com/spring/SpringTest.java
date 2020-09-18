@@ -12,7 +12,7 @@ import java.applet.AppletContext;
  **/
 public class SpringTest {
 
-    @Test
+/*    @Test*/
     public void helloTest(){
         // HelloWorld helloWorld = new HelloWorld();
         // helloWorld.setName("kk");
@@ -48,5 +48,14 @@ public class SpringTest {
 
         Car car2 = (Car) ctx.getBean("car2");
         System.out.println(car2.toString());
+
+        Person person = (Person) ctx.getBean("person");
+        System.out.println(person.toString());
+
+        Person person2 = (Person) ctx.getBean("person2");
+        System.out.println(person2.toString());
+
+        Person person3 = (Person) ctx.getBean("person3");
+        System.out.println(person3.toString());
     }
 }

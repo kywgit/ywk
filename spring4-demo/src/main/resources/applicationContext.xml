@@ -22,11 +22,52 @@
         <constructor-arg value = "shanghai" index="1"></constructor-arg>
         <constructor-arg value="300000" type="double"></constructor-arg>
     </bean>
+<!--  如果字面值包含特殊字符可以使用<![CDATA[]]>包裹起来  -->
+<!--    属性值也可以使用value子节点进行配置-->
     <bean id="car2" class="com.spring.Car">
         <constructor-arg value="bwm" type="java.lang.String"></constructor-arg>
-        <constructor-arg value="beijin" type="java.lang.String"></constructor-arg>
-        <constructor-arg value="240" type="int"></constructor-arg>
+        <constructor-arg  type="java.lang.String">
+            <value><![CDATA[<shanghai>]]]></value>
+        </constructor-arg>
+        <constructor-arg  type="int">
+            <value>240</value>
+        </constructor-arg>
     </bean>
+<!--    属性注入 bean引用-->
+    <bean id ="person" class="com.spring.Person">
+        <property name="name" value="kangkang"></property>
+        <property name="age" value="25"></property>
+      <!--  <property name="car" ref="car"></property>-->
+        <property name="car">
+            <ref bean="car" />
+        </property>
+    </bean>
+<!--内部bean 不能被外部引用 只能在内部使用-->
+    <bean id ="person2" class="com.spring.Person">
+        <property name="name" value="kang"></property>
+        <property name="age" value="20"></property>
+        <property name="car" >
+            <bean  class="com.spring.Car">
+                <constructor-arg value="ford"></constructor-arg>
+                <constructor-arg value="changan"></constructor-arg>
+                <constructor-arg value="200000"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+<!--构造器注入 bean引用-->
+    <bean id="person3" class="com.spring.Person">
+        <constructor-arg value="zhangsan" ></constructor-arg>
+        <constructor-arg value="27" ></constructor-arg>
+<!--        <constructor-arg ref="car2" ></constructor-arg>-->
+<!--        测试赋值 null-->
+       <!-- <constructor-arg><null/></constructor-arg>-->
+<!--        测试级联属性-->
+        <constructor-arg ref="car2" ></constructor-arg>
+        <property name="car.maxSpeed" value="260"></property>
+
+    </bean>
+
+
 
 
 </beans>
